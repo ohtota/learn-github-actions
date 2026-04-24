@@ -1,0 +1,26 @@
+name: Dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      enviroment:
+        description: "実行環境を選択してください"
+        required: true
+        default: "development"
+        type: choice
+        options:
+          - development
+          - staging
+          - production
+      version:
+        description: "デプロイするバージョンを入力してください"
+        required: true
+        type: string
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy application
+        run: |
+          echo "選択された環境： ${{ github.event.inputs.enviroment }}"
+          echo "指定されたバージョン： ${{ github.event.inputs.version }}"
+
